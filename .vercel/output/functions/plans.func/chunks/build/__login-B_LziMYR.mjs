@@ -1,0 +1,33 @@
+import { ref, mergeProps, unref, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrRenderAttr, ssrRenderDynamicModel, ssrRenderClass } from 'vue/server-renderer';
+
+const _sfc_main = {
+  __name: "__login",
+  __ssrInlineRender: true,
+  setup(__props) {
+    const showPass = ref(false);
+    const email = ref(null);
+    const password = ref(null);
+    const errorMessage = ref(null);
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<section${ssrRenderAttrs(mergeProps({ class: "w-full h-dvh relative" }, _attrs))}><div class="top_gem"></div><div class="size-full absolute top-0 left-0 z-20 flex items-center justify-center"><div class="lg:w-[450px] h-auto bg-white/10 border border-primary/20 backdrop-blur-md rounded-xl py-8 px-6 flex flex-col items-center justify-center"><span class="p-3 flex items-center justify-center bg-white border border-primary/30 rounded-md"><span class="icon-[solar--lock-keyhole-linear] text-2xl"></span></span><h5 class="md:text-xl md:font-medium md:mt-2">Welcome Back</h5><fieldset class="fieldset w-full mt-12"><label for="email" class="text-secondary">Email</label><input${ssrRenderAttr("value", unref(email))} type="email" class="input w-full no-out" placeholder="example@mail.com">`);
+      if (unref(errorMessage)) {
+        _push(`<p class="label text-error">${unref(errorMessage) ?? ""}</p>`);
+      } else {
+        _push(`<!---->`);
+      }
+      _push(`</fieldset><fieldset class="fieldset w-full mt-4"><label for="email" class="text-secondary">Password</label><div class="join w-full"><input${ssrRenderDynamicModel(unref(showPass) ? "text" : "password", unref(password), null)}${ssrRenderAttr("type", unref(showPass) ? "text" : "password")} class="input w-full no-out rounded-l-sm" placeholder="password"><button class="btn btn-primary btn-square join-item"><span class="${ssrRenderClass(
+        unref(showPass) ? "icon-[solar--eye-outline]" : "icon-[solar--eye-closed-outline]"
+      )}"></span></button></div></fieldset><button class="btn btn-primary w-full mt-10"> Login </button></div></div></section>`);
+    };
+  }
+};
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/nova/__login.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+
+export { _sfc_main as default };
+//# sourceMappingURL=__login-B_LziMYR.mjs.map

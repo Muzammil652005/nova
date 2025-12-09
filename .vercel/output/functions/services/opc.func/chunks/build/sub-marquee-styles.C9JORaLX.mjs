@@ -1,0 +1,8 @@
+const subMarquee_vue_vue_type_style_index_0_scoped_33372536_lang = '.marquee-container[data-v-33372536]{overflow:hidden;position:relative;width:100%}.marquee-track[data-v-33372536]{animation:marquee-scroll-33372536 60s linear infinite;display:flex;gap:1.5rem;width:-moz-max-content;width:max-content}.marquee-card[data-v-33372536]{flex-shrink:1}@keyframes marquee-scroll-33372536{0%{transform:translate(0)}to{transform:translate(-50%)}}.marquee-container:hover .marquee-track[data-v-33372536]{animation-play-state:paused}.marquee-container[data-v-33372536]:after,.marquee-container[data-v-33372536]:before{content:"";height:100%;pointer-events:none;position:absolute;top:0;width:100px;z-index:10}.marquee-container[data-v-33372536]:before{background:linear-gradient(to right,var(--tw-bg-primary),transparent);left:0}.marquee-container[data-v-33372536]:after{background:linear-gradient(to left,var(--tw-bg-primary),transparent);right:0}';
+
+const subMarqueeStyles_C9JORaLX = [
+  subMarquee_vue_vue_type_style_index_0_scoped_33372536_lang
+];
+
+export { subMarqueeStyles_C9JORaLX as default };
+//# sourceMappingURL=sub-marquee-styles.C9JORaLX.mjs.map
