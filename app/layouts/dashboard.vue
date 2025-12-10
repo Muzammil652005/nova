@@ -1,10 +1,15 @@
 <template>
-  <div class="w-screen h-dvh flex items-center justify-start">
+  <div class="w-screen min-h-screen flex overflow-hidden">
+
     <DashboardSidebar />
 
-    <div class="size-full flex flex-col dashboard_top_div">
+    <div class="flex-1 min-h-screen flex flex-col overflow-y-auto">
       <DashboardTopbar />
-      <slot />
+
+      <div class="w-full h-auto p-4 overflow-y-auto">
+        <slot />
+      </div>
     </div>
+
   </div>
 </template>

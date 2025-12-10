@@ -1,14 +1,19 @@
 <template>
   <section
-    class="h-[100vh] md:min-h-[620px] md:max-h-[880px] bg-primary parallax-section"
+    class="w-full min-h-screen lg:min-h-[760px] xl:min-h-screen bg-primary parallax-section py-6 px-4"
   >
+    <Nav />
+
+    <div class="top_gem"></div>
+
     <div
-      class="max-w-[1440px] h-full lg:h-[80%] mx-auto flex flex-col lg:flex-row items-center justify-center lg:gap-x-10 px-4 xl:px-0"
+      class="max-w-[1440px] w-full h-auto mx-auto flex flex-col lg:flex-row items-center justify-center lg:gap-x-10"
     >
+      <!-- Image Block -->
       <div
-        class="w-full lg:w-1/2 h-2/5 lg:h-full relative flex items-center justify-center"
+        class="w-full lg:w-1/2 h-auto relative flex items-center justify-center mt-6"
       >
-        <div class="w-full h-[80%] relative rounded-xl overflow-hidden">
+        <div class="w-full max-h-[450px] relative rounded-xl overflow-hidden">
           <NuxtImg
             class="rounded-xl image_assistant"
             src="/img/assistant_1.webp"
@@ -27,8 +32,10 @@
           </span>
         </div>
       </div>
+
+      <!-- Content Block -->
       <div
-        class="w-full lg:w-1/2 h-3/5 lg:h-full flex flex-col items-start justify-center gap-y-5 xl:gap-y-8 text-white"
+        class="w-full lg:w-1/2 h-auto flex flex-col items-start justify-center gap-y-5 xl:gap-y-8 text-white mt-10 lg:mt-0"
       >
         <h4
           class="text-3xl md:text-4xl md:font-medium lg:font-semibold lg:leading-12"
@@ -36,9 +43,11 @@
           Everything you need to register, scale, and manage your business—all
           in one Virtual Office
         </h4>
+
         <h5 class="text-2xl font-normal text-base-100/90">
           Everything Your Business Demands, All in One Place
         </h5>
+
         <p class="text-sm lg:text-lg text-base-100/60">
           A virtual office gives you the power to be present anywhere in the
           world without actually moving there. For small and medium businesses,
@@ -46,7 +55,10 @@
           financial burden of setting up multiple offices.
         </p>
 
-        <div class="w-full h-32 grid grid-cols-4 gap-6 counter-section mb-4">
+        <!-- Counter -->
+        <div
+          class="w-full h-auto grid grid-cols-4 gap-4 counter-section mt-4"
+        >
           <template v-for="(i, k) in featureCount" :key="k">
             <div
               class="size-20 md:size-full flex flex-col items-center justify-center bg-white/10 border border-white/20 rounded-md max-lg:px-2 whitespace-nowrap"
@@ -69,9 +81,10 @@
       </div>
     </div>
 
+    <!-- Marquee -->
     <HomeMarquee
       :marquee="marqueeFeatures"
-      class="max-md:mt-12 max-md:hidden block"
+      class="mt-10 max-md:hidden"
     />
   </section>
 </template>
@@ -91,29 +104,9 @@ const marqueeFeatures = [
 ];
 
 const featureCount = [
-  {
-    title: "Location",
-    count: "300",
-    time: 10,
-    end: "+",
-  },
-  {
-    title: "Happy Client",
-    count: "20",
-    time: 400,
-    end: "k",
-  },
-  {
-    title: "support",
-    count: "24/7",
-    time: 0,
-    end: "",
-  },
-  {
-    title: "states",
-    count: "8",
-    time: 500,
-    end: "+",
-  },
+  { title: "Location", count: "300", time: 10, end: "+" },
+  { title: "Happy Client", count: "20", time: 400, end: "k" },
+  { title: "support", count: "24/7", time: 0, end: "" },
+  { title: "states", count: "8", time: 500, end: "+" },
 ];
 </script>

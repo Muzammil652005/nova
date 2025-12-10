@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full lg:min-h-[640px] lg:h-auto xl:h-[60vh] bg-primary py-12 lg:py-24"
+    class="w-full min-h-screen lg:min-h-[640px] lg:h-auto bg-primary py-12 lg:py-24"
   >
     <div
       class="max-w-[1440px] h-full mx-auto flex flex-col items-start justify-center gap-x-6 gap-y-10"
@@ -61,20 +61,6 @@
           </p>
         </div>
       </div>
-      <!-- <div class="w-full flex items-center justify-center py-10">
-                <div
-                    class="min-w-[980px] max-lg:w-full rounded-full bg-[#ff8a80] p-8 flex items-center justify-start gap-x-6">
-                    <img class="w-12" src="/favicon.ico" alt="">
-                    <div class="w-full flex items-center justify-between">
-                        <span class="">
-                            <h1 class="text-2xl font-semibold">Get in Touch</h1>
-                            <p class="font-medium">Feel free to ask if anything’s unclear about Optune</p>
-                        </span>
-                        <button class="btn btn-primary">Contact Us</button>
-                    </div>
-
-                </div>
-            </div> -->
     </div>
   </section>
 </template>

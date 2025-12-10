@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full max-h-[980px] h-auto md:min-h-[620px] bg-primary">
+  <section class="w-full h-auto bg-primary">
     <div
       class="max-w-[1440px] h-full mx-auto flex flex-col max-md:px-4 py-8 lg:py-16"
     >

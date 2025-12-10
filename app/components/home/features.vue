@@ -1,12 +1,9 @@
 <template>
-  <section
-    class="w-full max-h-[1150px] h-auto bg-primary max-lg:px-4 py-8 lg:py-16"
-  >
-    <div class="max-w-[1440px] h-full mx-auto flex flex-col">
-      <span class="w-full flex items-center justify-between">
-        <h4
-          class="text-2xl md:text-4xl lg:font-semibold lg:leading-12 text-white"
-        >
+  <section class="w-full min-h-screen bg-primary px-4 py-12 lg:py-20">
+    <div class="max-w-[1440px] mx-auto flex flex-col gap-10">
+      <!-- Heading + Button -->
+      <div class="w-full flex items-center justify-between">
+        <h4 class="text-2xl md:text-4xl font-semibold text-white leading-tight">
           Built for Startups <br />
           Designed for Growth
         </h4>
@@ -15,55 +12,51 @@
           Lets Talk
           <span class="icon-[solar--arrow-right-up-linear] text-xl"></span>
         </button>
-      </span>
+      </div>
 
-      <div class="w-full md:h-1/2 grid md:grid-cols-3 grid-flow-row gap-3 mt-8">
+      <!-- Top Grid -->
+      <div class="grid md:grid-cols-3 gap-4">
         <template v-for="(i, k) in features.slice(0, 3)" :key="k">
           <div
-            :class="i > 4 ? 'col-span-2' : ''"
-            class="size-full bg-white rounded-xl px-4 py-6 lg:px-8 lg:py-6 flex flex-col justify-between max-md:gap-y-4"
+            class="bg-white rounded-xl px-6 py-8 flex flex-col justify-start gap-4 h-auto"
           >
-            <span
-              :class="i.logo"
-              class="text-primary text-5xl lg:text-6xl"
-            ></span>
+            <span :class="i.logo" class="text-primary text-6xl"></span>
 
-            <span class="w-full h-auto">
-              <h4
-                class="font-semibold lg:text-xl lg:font-bold text-primary lg:mt-8"
-              >
+            <div>
+              <h4 class="font-semibold text-xl text-primary mt-4">
                 {{ i.title }}
               </h4>
-              <p class="lg:text-lg lg:text-primary/60 lg:mt-3">
+              <p class="text-primary/60 mt-2 text-lg">
                 {{ i.description }}
               </p>
-            </span>
+            </div>
           </div>
         </template>
       </div>
-      <div class="w-full md:h-1/2 grid md:grid-cols-2 grid-flow-row gap-3 mt-3">
+
+      <!-- Bottom Grid -->
+      <div class="grid md:grid-cols-2 gap-4">
         <template v-for="i in features.slice(3, 5)" :key="i">
           <div
-            class="size-full bg-white rounded-xl px-6 py-4 lg:px-8 lg:py-6 flex flex-col justify-between max-md:gap-y-4"
+            class="bg-white rounded-xl px-6 py-8 flex flex-col justify-start gap-4 h-auto"
           >
-            <span
-              :class="i.logo"
-              class="text-primary text-5xl lg:text-6xl"
-            ></span>
+            <span :class="i.logo" class="text-primary text-6xl"></span>
 
-            <span class="w-full h-auto">
-              <h4
-                class="font-semibold lg:text-xl lg:font-bold text-primary lg:mt-8"
-              >
+            <div>
+              <h4 class="font-semibold text-xl text-primary mt-4">
                 {{ i.title }}
               </h4>
-              <p class="lg:text-lg lg:text-primary/60 lg:mt-3 hidden lg:block">
+
+              <!-- Desktop Long Text -->
+              <p class="text-primary/60 mt-3 text-lg hidden lg:block">
                 {{ i.longDescription }}
               </p>
-              <p class="lg:text-lg lg:text-primary/60 lg:mt-3 block lg:hidden">
+
+              <!-- Mobile Short Text -->
+              <p class="text-primary/60 mt-3 text-lg lg:hidden">
                 {{ i.description }}
               </p>
-            </span>
+            </div>
           </div>
         </template>
       </div>

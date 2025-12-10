@@ -1,12 +1,13 @@
 <template>
   <section
-    class="w-full max-h-[1240px] md:max-h-[680px] md:h-[640px] bg-primary py-14"
+    class="w-full min-h-screen lg:min-h-[680px] bg-primary py-14"
   >
     <div
-      class="max-w-[1440px] h-full mx-auto flex max-md:flex-col flex-row items-center justify-center gap-y-6 md:gap-x-6 max-md:px-4"
+      class="max-w-[1440px] h-auto mx-auto flex max-md:flex-col flex-row items-center justify-center gap-y-6 md:gap-x-6 max-md:px-4"
     >
+      <!-- LEFT IMAGE -->
       <div
-        class="w-full md:w-1/2 h-[350px] md:h-full relative flex items-center justify-center"
+        class="w-full md:w-1/2 h-auto md:h-full relative flex items-center justify-center"
       >
         <div class="size-full relative rounded-xl overflow-hidden">
           <NuxtImg
@@ -28,11 +29,12 @@
         </div>
       </div>
 
+      <!-- RIGHT AUTO HEIGHT FIXED -->
       <div
-        class="w-full md:w-1/2 h-full max-md:min-h-[600px] max-h-[760px] rounded-2xl bg-[#ff8a80] p-8 overflow-hidden relative"
+        class="w-full md:w-1/2 h-auto rounded-2xl bg-[#ff8a80] p-8 overflow-hidden relative"
       >
         <div
-          class="h-full flex flex-col items-center justify-evenly gap-y-4 animate-marquee-vertical"
+          class="w-full flex flex-col items-center justify-start gap-y-4 animate-marquee-vertical"
         >
           <template v-for="(i, k) in contentArray" :key="k">
             <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
@@ -41,21 +43,22 @@
             </div>
           </template>
 
-          <template v-for="(i, k) in contentArray" :key="k">
+          <!-- extra groups keep same for animation -->
+          <template v-for="(i, k) in contentArray" :key="'b-'+k">
             <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
               <h1 class="text-lg font-semibold" v-html="i.title"></h1>
               <p v-html="i.description"></p>
             </div>
           </template>
 
-          <template v-for="(i, k) in contentArray" :key="k">
+          <template v-for="(i, k) in contentArray" :key="'c-'+k">
             <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
               <h1 class="text-lg font-semibold" v-html="i.title"></h1>
               <p v-html="i.description"></p>
             </div>
           </template>
 
-          <template v-for="(i, k) in contentArray" :key="k">
+          <template v-for="(i, k) in contentArray" :key="'d-'+k">
             <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
               <h1 class="text-lg font-semibold" v-html="i.title"></h1>
               <p v-html="i.description"></p>
@@ -63,6 +66,7 @@
           </template>
         </div>
       </div>
+      <!-- END FIX -->
     </div>
   </section>
 </template>

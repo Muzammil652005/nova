@@ -1,7 +1,14 @@
 <template>
   <div class="marquee-container">
     <div class="marquee-content gap-x-4">
+      <!-- Original Items -->
       <template v-for="(item, index) in marquee" :key="index">
+        <span>{{ item }}</span>
+        <p class="text-6xl text-center flex items-center justify-center">•</p>
+      </template>
+
+      <!-- 🔥 Fix: Duplicate Items for continuous scroll -->
+      <template v-for="(item, index) in marquee" :key="'dup-' + index">
         <span>{{ item }}</span>
         <p class="text-6xl text-center flex items-center justify-center">•</p>
       </template>
@@ -24,7 +31,6 @@ onMounted(() => {
     xPercent: -50,
     ease: "none",
     duration: 40,
-
     repeat: -1,
   });
 });

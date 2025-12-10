@@ -48,6 +48,20 @@
 }
 
 @layer components {
+
+  /* 📌 Responsive Fix Added */
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  /* 📌 End of Fix */
+
   .navst {
     @apply max-w-[1440px] w-full mx-auto md:h-20 flex items-center justify-between px-4 max-md:py-4 md:px-6 border border-primary/50 bg-white/30 shadow-[0px_0px_26px_-10px] shadow-primary rounded-xl backdrop-blur-3xl;
   }
@@ -109,7 +123,6 @@
       linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
     background-size: 48px 48px;
 
-    /* Mask fade effect */
     -webkit-mask-image: radial-gradient(
       ellipse 70% 60% at 50% 0%,
       #000 60%,
@@ -173,7 +186,6 @@
     font-size: 72px;
     color: transparent;
     -webkit-text-stroke: 0.5px white;
-    /* 2px wide black stroke */
     text-stroke: 1px white;
     font-weight: bold;
   }
@@ -222,7 +234,6 @@
     0% {
       transform: translateX(0%);
     }
-
     100% {
       transform: translateX(-100%);
     }
@@ -232,7 +243,6 @@
     0% {
       transform: translateX(100%);
     }
-
     100% {
       transform: translateX(0%);
     }
@@ -250,7 +260,6 @@
     0% {
       transform: translateY(0%);
     }
-
     100% {
       transform: translateY(-100%);
     }
@@ -260,7 +269,6 @@
     0% {
       transform: translateY(100%);
     }
-
     100% {
       transform: translateY(0%);
     }

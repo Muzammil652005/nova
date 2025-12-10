@@ -1,8 +1,6 @@
 <template>
   <div class="w-full h-full p-4">
-    <div
-      class="overflow-x-auto rounded-box border border-base-content/5 bg-white"
-    >
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-white">
       <table class="table">
         <!-- head -->
         <thead>
@@ -27,13 +25,8 @@
                 <td>{{ i.location }}</td>
                 <td>{{ i.message }}</td>
                 <td>
-                  <button
-                    @click="deleteContact(i.id)"
-                    class="btn btn-square btn-soft btn-error"
-                  >
-                    <span
-                      class="icon-[solar--trash-bin-2-outline] text-lg"
-                    ></span>
+                  <button @click="deleteContact(i.id)" class="btn btn-square btn-soft btn-error">
+                    <span class="icon-[solar--trash-bin-2-outline] text-lg"></span>
                   </button>
                 </td>
               </tr>
@@ -47,11 +40,7 @@
       <div class="w-full flex items-center justify-between mt-4">
         <div class="join">
           <template v-for="i in Math.round(total / limit)" :key="i">
-            <button
-              @click="((page = i), getContact())"
-              class="join-item btn btn-md"
-              v-html="i"
-            ></button>
+            <button @click="((page = i), getContact())" class="join-item btn btn-md" v-html="i"></button>
           </template>
         </div>
       </div>
@@ -106,4 +95,4 @@ async function deleteContact(id) {
 function paginate() {
   return (total.value / limit.value).toFixed(0);
 }
-</script>
+</script> ------------- this is the index.vue file just fix and give the code without modification

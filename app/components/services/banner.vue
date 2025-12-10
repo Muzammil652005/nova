@@ -1,23 +1,25 @@
 <template>
   <section
-    class="w-full h-[70vh] lg:min-h-[760px] lg:h-auto xl:h-[70vh] relative pt-4 px-4"
+    class="w-full min-h-screen lg:min-h-[760px] xl:min-h-screen relative pt-4 px-4 overflow-visible"
   >
     <Nav />
 
     <div class="top_gem"></div>
 
     <Transition name="fade" mode="out-in">
-      <div class="w-full h-[calc(100%-80px)] sticky z-30 max-lg:block">
+      <!-- FIX: always h-auto (not fixed height) -->
+      <div class="w-full h-auto z-30">
         <div
-          class="max-w-[1440px] max-md:min-h-[480px] h-full mx-auto flex flex-col lg:flex-row items-center justify-center max-md:pb-4 md:px-4 xl:px-0"
+          class="max-w-[1440px] h-auto mx-auto flex flex-col lg:flex-row items-center justify-center max-md:pb-4 md:px-4 xl:px-0"
         >
           <div
-            class="w-full lg:w-1/2 h-full flex flex-col items-center lg:items-start justify-center gap-y-4"
+            class="w-full lg:w-1/2 h-auto flex flex-col items-center lg:items-start justify-center gap-y-4"
           >
             <h1
               class="text-3xl max-md:text-center max-md:font-semibold md:text-6xl"
               v-html="content.heading[count]"
             ></h1>
+
             <p
               class="text-sm max-md:text-center md:text-lg"
               v-html="content.paragraph[count]"
@@ -32,6 +34,7 @@
                   {{ content.button[count]["btn-2"] }}
                 </button>
               </template>
+
               <template v-else>
                 <button class="btn btn-primary">
                   {{ content.button[count] }}
@@ -44,6 +47,7 @@
                 @click="prev"
                 class="icon-[solar--alt-arrow-left-line-duotone] text-2xl cursor-pointer"
               ></span>
+
               <ul class="flex items-center justify-center gap-x-2">
                 <li
                   :class="{ 'px-4': count === 0 }"
@@ -58,6 +62,7 @@
                   class="p-1 rounded-full bg-black"
                 ></li>
               </ul>
+
               <span
                 @click="next"
                 class="icon-[solar--alt-arrow-right-line-duotone] text-2xl cursor-pointer"
@@ -66,7 +71,7 @@
           </div>
 
           <div
-            class="w-1/2 h-full hidden lg:flex items-center justify-end relative pt-[40px] gap-x-4"
+            class="w-1/2 h-auto hidden lg:flex items-center justify-end relative pt-[40px] gap-x-4"
           >
             <NuxtImg
               class="drop-shadow-2xl rounded-xl"
@@ -88,12 +93,12 @@ const content = ref({
   heading: {
     0: "Make it official. <br> Get Incorporated.",
     1: "Find your Perfect <br> Community here!",
-    2: "Step into Success <br> with Rise for YC",
+    2: "Step into Success <br> Grow with NovaDesk",
   },
   paragraph: {
     0: "Seamless Company Registration service for early- <br class='max-md:hidden'> stage founders with No Hidden Charges.",
     1: "Explore our communities for founders, which offer <br class='max-md:hidden'> networking, resources, deals, and more.",
-    2: "An all-inclusive program designed by Experts to <br class='max-md:hidden'> guide founders in their Y Combinator journey.",
+    2: "Smart workplace solutions tailored by experts to <br class='max-md:hidden'> support your business at every stage of growth.",
   },
   button: {
     0: {
@@ -125,7 +130,6 @@ onBeforeUnmount(() => {
 function next() {
   count.value = (count.value + 1) % totalSlides;
 }
-
 function prev() {
   count.value = (count.value - 1 + totalSlides) % totalSlides;
 }
