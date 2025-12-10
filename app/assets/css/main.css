@@ -94,48 +94,14 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image:
-      linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
-      radial-gradient(
-        circle 500px at 0% 20%,
-        oklch(from var(--color-primary) l c h / 0.5),
-        transparent
-      ),
-      radial-gradient(
-        circle 500px at 100% 0%,
-        oklch(from var(--color-primary) l c h / 0.5),
-        transparent
-      );
-    background-size:
-      48px 48px,
-      48px 48px,
-      100% 100%,
-      100% 100%;
   }
 
   .top-fade-grid {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image:
-      linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-      linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
-    background-size: 48px 48px;
-
-    -webkit-mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 0%,
-      #000 60%,
-      transparent 100%
-    );
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: cover;
-
-    mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 0%,
-      #000 80%,
-      transparent 100%
-    );
     mask-repeat: no-repeat;
     mask-size: cover;
   }
@@ -144,22 +110,8 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image:
-      linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-      linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
-    background-size: 48px 48px;
-    -webkit-mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 100%,
-      #000 60%,
-      transparent 100%
-    );
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: cover;
-    mask-image: radial-gradient(
-      ellipse 70% 60% at 50% 100%,
-      #000 60%,
-      transparent 100%
-    );
     mask-repeat: no-repeat;
     mask-size: cover;
   }
@@ -176,10 +128,6 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image:
-      linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-      linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
-    background-size: 40px 40px;
   }
 
   .marquee-content > span {
@@ -309,4 +257,13 @@
   .service_dec > h4:not(:first-child) {
     @apply border-t-2 border-white md:border-primary pt-6;
   }
+}
+
+/* 🚫 Disable Red/Gray Grid Overlay — FIX*/
+.top_gem,
+.top-fade-grid,
+.bottom-fade-grid {
+  background-image: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
 }
