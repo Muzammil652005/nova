@@ -1,6 +1,6 @@
 <template>
   <section class="w-full max-h-[5500px] h-auto lg:min-h-[760px] lg:h-auto relative pt-4 px-4">
-    <Nav />
+    <!-- <Nav /> -->
 
     <div class="top_gem"></div>
     <div class="max-w-[1440px] w-full h-[calc(100%-80px)] mx-auto sticky z-30 py-4 lg:py-6">

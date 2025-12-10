@@ -1,72 +1,38 @@
 <template>
-  <section
-    class="w-full min-h-screen lg:min-h-[680px] bg-primary py-14"
-  >
-    <div
-      class="max-w-[1440px] h-auto mx-auto flex max-md:flex-col flex-row items-center justify-center gap-y-6 md:gap-x-6 max-md:px-4"
-    >
-      <!-- LEFT IMAGE -->
-      <div
-        class="w-full md:w-1/2 h-auto md:h-full relative flex items-center justify-center"
-      >
-        <div class="size-full relative rounded-xl overflow-hidden">
-          <NuxtImg
-            class="rounded-xl image_assistant"
-            src="/img/assistant_1.webp"
-          />
+  <section class="w-full bg-primary py-14 overflow-hidden">
+    <div class="max-w-[1440px] mx-auto flex flex-col items-center gap-10 px-4">
 
-          <span
-            class="size-24 md:size-32 lg:size-44 pt-5 pl-5 bg-primary absolute bottom-0 right-0 rounded-tl-xl flex"
-          >
-            <span
-              class="size-full bg-white rounded-xl flex items-center justify-center"
-            >
-              <span
-                class="icon-[solar--arrow-right-up-linear] text-3xl md:text-5xl lg:text-8xl text-primary"
-              ></span>
-            </span>
+      <!-- 📌 IMAGE BLOCK (Top) -->
+      <div class="w-full max-w-[600px] relative rounded-xl overflow-hidden">
+        <NuxtImg src="/img/assistant_1.webp" class="image_assistant rounded-xl w-full" />
+        <span class="size-24 md:size-32 lg:size-44 pt-5 pl-5 bg-primary absolute bottom-0 right-0 rounded-tl-xl flex">
+          <span class="size-full bg-white rounded-xl flex items-center justify-center">
+            <span class="icon-[solar--arrow-right-up-linear] text-3xl md:text-5xl lg:text-8xl text-primary"></span>
           </span>
-        </div>
+        </span>
       </div>
 
-      <!-- RIGHT AUTO HEIGHT FIXED -->
-      <div
-        class="w-full md:w-1/2 h-auto rounded-2xl bg-[#ff8a80] p-8 overflow-hidden relative"
-      >
-        <div
-          class="w-full flex flex-col items-center justify-start gap-y-4 animate-marquee-vertical"
-        >
-          <template v-for="(i, k) in contentArray" :key="k">
-            <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
-              <h1 class="text-lg font-semibold" v-html="i.title"></h1>
-              <p v-html="i.description"></p>
-            </div>
-          </template>
-
-          <!-- extra groups keep same for animation -->
-          <template v-for="(i, k) in contentArray" :key="'b-'+k">
-            <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
-              <h1 class="text-lg font-semibold" v-html="i.title"></h1>
-              <p v-html="i.description"></p>
-            </div>
-          </template>
-
-          <template v-for="(i, k) in contentArray" :key="'c-'+k">
-            <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
-              <h1 class="text-lg font-semibold" v-html="i.title"></h1>
-              <p v-html="i.description"></p>
-            </div>
-          </template>
-
-          <template v-for="(i, k) in contentArray" :key="'d-'+k">
-            <div class="w-full h-auto bg-white rounded-lg p-4 space-y-4">
-              <h1 class="text-lg font-semibold" v-html="i.title"></h1>
-              <p v-html="i.description"></p>
+      <!-- 📌 TEXT SLIDER (Below image) -->
+      <div class="w-full max-w-[900px] overflow-hidden">
+        <div class="flex gap-6" :style="{
+          transform: `translateX(-${currentSlide * 100}%)`,
+          transition: 'transform 0.7s ease',
+        }">
+          <template v-for="(item, index) in contentArray" :key="index">
+            <div class="min-w-full bg-white rounded-xl p-6 shadow-md space-y-3">
+              <h1 class="text-lg font-bold" v-html="item.title"></h1>
+              <p class="text-base" v-html="item.description"></p>
             </div>
           </template>
         </div>
       </div>
-      <!-- END FIX -->
+
+      <!-- Indicators -->
+      <div class="flex items-center justify-center gap-2">
+        <span v-for="(i, idx) in contentArray.length" :key="idx" class="h-2 rounded-full transition-all duration-300"
+          :class="idx === currentSlide ? 'bg-white w-4' : 'bg-white/50 w-2'"></span>
+      </div>
+
     </div>
   </section>
 </template>
@@ -86,39 +52,54 @@ const contentArray = [
   {
     title: "Meeting Room Access",
     description:
-      "Conduct professional meetings and client interactions in our fully equipped meeting rooms available across various locations in India. Enjoy the convenience of booking meeting spaces online for seamless scheduling.",
+      "Conduct professional meetings and client interactions in our fully equipped meeting rooms across various locations in India.",
   },
   {
     title: "Business Support Services",
     description:
-      "Enhance your virtual office experience with additional services like call answering, receptionist services, and administrative support (mention these services are optional if they are not included in all plans).",
+      "Enhance your business with call answering, receptionist services, and admin support.",
   },
 ];
 
-const { $gsap } = useNuxtApp();
-let timeline = null;
-onMounted(() => {
-  timeline = $gsap.timeline();
+const currentSlide = ref(0);
+let autoScroll;
 
-  timeline.to(
-    ".image_assistant",
-    {
-      yPercent: -50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".parallax-section",
-        scrub: true,
-        start: "top bottom",
-        end: "bottom top",
-      },
-    },
-    0,
-  );
+onMounted(() => {
+  autoScroll = setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % contentArray.length;
+  }, 4500);
 });
 
-onUnmounted(() => {
-  if (timeline) {
-    timeline.kill();
-  }
+onBeforeUnmount(() => {
+  clearInterval(autoScroll);
 });
 </script>
+
+<!-- <style scoped>
+/* 🔥 Makes image fill container properly */
+.image_assistant {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 🔥 Prevents unwanted vertical stretch */
+.max-w-\[600px\] {
+  max-height: 420px;
+}
+</style> -->
+<style scoped>
+/* Make image cover full area inside container */
+.image_assistant {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Ensures the image block height is consistent */
+.max-w-\[600px\] {
+  width: 100%;
+  height: 450px;
+  /* You can increase to 500/550 if needed */
+}
+</style>

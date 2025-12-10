@@ -1,5 +1,5 @@
 <template>
-  <ServicesSubService1 />
+  <!-- <ServicesSubService1 /> -->
 
   <ServicesSubMarquee />
 
@@ -21,13 +21,15 @@
             <template v-for="(i, k) in links" :key="k">
               <li
                 :class="currentView == i.key ? 'service_li_active' : ''"
-                class="w-full py-4 pr-6 service_li"
+                class="w-full py-4 pr-6 service_li cursor-pointer"
+                @click="scrollTo(i.key)"
               >
                 {{ i.text }}
               </li>
             </template>
           </ul>
         </div>
+
         <div
           class="h-full w-full md:w-[60%] md:pl-8 md:pr-4 max-md:mt-6 sticky top-4"
         >
@@ -40,37 +42,24 @@
                 {{ i.title }}
               </h4>
 
-              <!-- Show description if present -->
               <p v-if="i.desc" class="text-sm mb-2">{{ i.desc }}</p>
 
-              <!-- Render list if present -->
               <ul v-if="i.list" class="ml-6 my-2 space-y-1 pb-6">
                 <template v-for="(v, s) in i.list" :key="`${k}-${s}`">
                   <li class="list-decimal">
-                    <!-- Case 1: v is just a string -->
                     <span v-if="typeof v === 'string'">{{ v }}</span>
-
-                    <!-- Case 2: v is an object with title/desc/list -->
                     <div v-else>
                       <p v-if="v.title" class="font-medium">{{ v.title }}</p>
                       <p v-if="v.desc" class="text-sm">{{ v.desc }}</p>
 
-                      <!-- Nested list -->
                       <ul v-if="v.list" class="ml-6 list-disc">
                         <li v-for="(x, z) in v.list" :key="`${k}-${s}-${z}`">
                           <span v-if="typeof x === 'string'">{{ x }}</span>
-
-                          <!-- Support further nesting -->
                           <div v-else>
-                            <p v-if="x.title" class="font-medium">
-                              {{ x.title }}
-                            </p>
+                            <p v-if="x.title" class="font-medium">{{ x.title }}</p>
                             <p v-if="x.desc" class="text-sm">{{ x.desc }}</p>
                             <ul v-if="x.list" class="ml-6 list-disc">
-                              <li
-                                v-for="(y, q) in x.list"
-                                :key="`${k}-${s}-${z}-${q}`"
-                              >
+                              <li v-for="(y, q) in x.list" :key="`${k}-${s}-${z}-${q}`">
                                 {{ y }}
                               </li>
                             </ul>
@@ -93,6 +82,7 @@
 
 <script setup>
 const currentView = ref(null);
+
 const links = [
   { text: "Documents required for registration", key: "docs" },
   { text: "Incorporation Process", key: "process" },
@@ -111,9 +101,11 @@ const companyTypes = {
   small:
     "A flexible partnership with limited liability and separate legal identity, suitable for SMEs and professionals seeking cost-effective compliance.",
 };
+
 const registrationInfo = [
   {
     title: "Documents Required to Register a Limited Liability Partnership",
+    key: "docs",
     list: [
       {
         title: "Identity Proof and Address Proof",
@@ -138,124 +130,98 @@ const registrationInfo = [
   },
   {
     title: "Limited Liability Partnership Incorporation Process",
+    key: "process",
     list: [
       {
         title: "Obtain a Digital Signature Certificate (DSC)",
-        desc: "A DSC is a digital method of verifying or attesting a document obtained through any Government Certifying Agencies (CAs) with either one-year or two-year validity. You can approach CAs for Aadhaar e-KYC verification or supporting documents like PAN, identity proof, and address proof.",
+        desc: "A DSC is used for verifying or attesting documents issued by Government Certifying Agencies.",
       },
       {
         title: "Name Approval",
-        desc: "Reserve an LLP's name using the LLP-RUN form (Limited Liability Partnership - Reserve Unique Name). Two proposed names can be submitted.",
+        desc: "Reserve an LLP's name using LLP-RUN form.",
       },
       {
         title: "LLP Registration",
         list: [
-          "Fill out the FiLLiP (Form for Incorporation of LLP) and submit to the Registrar where LLP's registered office is located.",
-          "Submit Subscriber Sheet and consent of a Director (Form DIR-9) alongside FiLLiP.",
-          "Subscriber Sheet is legal evidence of the agreement of initial members to participate.",
+          "Fill FiLLiP (Form for Incorporation of LLP)",
+          "Submit Subscriber Sheet & Consent of Partners",
         ],
       },
       {
         title: "Submit LLP Agreement",
-        desc: "File the LLP Agreement using Form 3 on the MCA portal within 30 days of registration. The agreement governs the mutual rights and responsibilities of partners.",
+        desc: "File Form 3 on MCA within 30 days of registration.",
       },
-      "Open a current bank account for the LLP",
-      "File Commencement of Business Certificate within prescribed timeline",
+      "Open a current account",
+      "File Commencement Certificate",
     ],
   },
   {
     title: "Compliances for Limited Liability Partnership",
+    key: "compliance",
     list: [
       {
         title: "For Partners",
         list: [
-          "Minimum of two partners required to form an LLP.",
-          "Typically no upper limit on the number of partners.",
+          "Minimum of two partners",
+          "No upper limit for number of partners",
         ],
       },
       {
         title: "For the LLP",
         list: [
-          "File LLP agreement within 30 days or face penalty of Rs 100/day.",
-          "File form DIR3 for DIN allotment if existing company.",
-          "File annual statements: Forms 11 (Annual Return) and 8 (Statement of Accounts and Solvency).",
-          "File Income Tax Return (ITR) annually.",
-          "Deposit partners' contributions to bank as per agreed timeline.",
-          "Obtain GST registration as legally required.",
-          "Conduct audit if turnover exceeds Rs 40 lakhs or contribution exceeds Rs 25 lakhs.",
-        ],
-      },
-      {
-        title: "Minimum Capital Requirement",
-        desc: "No minimum capital requirement. Partners may mutually determine capital amount. Initial capital of ₹10,000 is advisable.",
-      },
-      {
-        title: "Tax Rates",
-        list: [
-          "Income tax on LLP earnings at a fixed rate of 30%.",
-          "Surcharge of 12% for taxable income exceeding ₹1 Crore.",
-          "Health and Education cess of 4% on tax plus surcharge.",
+          "File LLP Agreement within 30 days",
+          "File annual returns (Form 8 & 11)",
+          "File Income Tax Return",
         ],
       },
     ],
   },
   {
-    title: "Advantages of Limited Liability Partnership",
+    title: "Advantages of LLP",
+    key: "advantages",
     list: [
-      "Limited liability limited to partners' contributions.",
-      "Separate legal entity responsible for assets and liabilities.",
-      "Simpler registration process and fewer compliances than companies.",
-      "No requirement for minimum paid-up capital.",
-      "Perpetual succession unaffected by partner changes.",
-      "No maximum limit to number of partners.",
+      "Limited liability",
+      "Separate legal identity",
+      "Less compliance burden",
     ],
   },
   {
-    title: "Disadvantages of Limited Liability Partnership",
+    title: "Disadvantages of LLP",
+    key: "disadvantages",
     list: [
-      "Difficult to raise capital due to absence of equity shareholders.",
-      "Cannot raise money via IPO.",
-      "Dissolution is time-consuming with rigorous documentation.",
+      "Difficult to raise capital",
+      "Cannot issue shares",
     ],
   },
   {
-    title: "Limited Liability Partnership Registration Number",
-    desc: "Known as LLPIN, a unique 7-digit alphanumeric code assigned on registration, e.g. AAA-1234.",
+    title: "Registration Number",
+    key: "reg",
+    desc: "LLPIN — unique 7-digit registration number.",
   },
   {
-    title: "How to Get a Registration Number",
-    desc: "After FiLLiP Form approval, ROC issues Certificate of Incorporation containing LLP name, LLPIN, registration date, and registered office details.",
+    title: "Registration Time",
+    key: "time",
+    list: ["7–10 days standard processing time"],
   },
   {
-    title: "Limited Liability Partnership Registration Time",
-    list: [
-      "Typical processing time is 7-10 days after submission of documents.",
-      "Delays may be caused by documentation errors, name approval issues, MCA server problems, payment delays, or jurisdictional processing differences.",
-    ],
-  },
-  {
-    title: "Limited Liability Partnership Registration Fees",
-    desc: "Cost can vary by jurisdiction and professional fees. Razorpay Rize charges ₹1,499 plus government fees.",
+    title: "Fees",
+    key: "fee",
+    desc: "₹1,499 + Government fees",
   },
   {
     title: "Checklist for Registration",
+    key: "checklist",
     list: [
-      "Obtain DSC for all partners.",
-      "Reserve LLP name using LLP-RUN form.",
-      "Fill and submit FiLLiP form.",
-      "Get Certificate of Incorporation.",
-      "Obtain PAN and TAN.",
-      "Draft LLP Agreement.",
-      "Open current bank account.",
-      "Comply with regulatory filings.",
+      "Obtain DSC",
+      "Reserve name",
+      "Submit FiLLiP form",
+      "Get Certificate of Incorporation",
     ],
   },
 ];
 
 function scrollTo(id) {
-  let cele = document.getElementById(id);
-  cele.scrollIntoView();
-
   currentView.value = id;
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 </script>

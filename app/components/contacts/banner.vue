@@ -2,7 +2,7 @@
   <section
     class="w-full min-h-screen lg:min-h-[840px] xl:min-h-screen relative py-4 px-4"
   >
-    <Nav />
+    <!-- <Nav /> -->
 
     <div class="top_gem"></div>
 

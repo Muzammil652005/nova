@@ -1,6 +1,4 @@
 <template>
-  <ServicesSubService1 />
-
   <ServicesSubMarquee />
 
   <section class="w-full lg:h-auto">
@@ -10,81 +8,83 @@
       :small="companyTypes.small"
     />
 
-    <div class="max-w-[1440px] h-full mx-auto flex flex-col">
+    <div class="max-w-[1440px] mx-auto flex flex-col">
       <div
-        class="size-full flex flex-col md:flex-row items-start justify-start mt-8 scroll-smooth max-md:bg-primary max-md:px-4"
+        class="size-full flex flex-col md:flex-row mt-8 max-md:bg-primary max-md:px-4"
       >
-        <div
-          class="h-screen w-auto md:px-6 pr-0 sticky top-4 max-md:hidden block"
-        >
+        <!-- LEFT MENU -->
+        <div class="h-screen md:px-6 pr-0 sticky top-4 max-md:hidden">
           <ul class="size-full md:border-r md:border-slate-500">
-            <template v-for="(i, k) in links" :key="k">
-              <li
-                :class="currentView == i.key ? 'service_li_active' : ''"
-                class="w-full py-4 pr-6 service_li"
-              >
-                {{ i.text }}
-              </li>
-            </template>
+            <li
+              v-for="(i,k) in links"
+              :key="k"
+              @click="scrollToSection(i.key)"
+              class="w-full py-4 pr-6 service_li cursor-pointer"
+              :class="currentView === i.key ? 'service_li_active' : ''"
+            >
+              {{ i.text }}
+            </li>
           </ul>
         </div>
 
-        <div
-          class="h-full w-full md:w-[60%] md:pl-8 md:pr-4 max-md:mt-6 sticky top-4"
-        >
+        <!-- RIGHT CONTENT -->
+        <div class="h-full w-full md:w-[60%] md:pl-8 md:pr-4 max-md:mt-6">
           <ul class="overflow-y-scroll service_dec">
-            <template v-for="(i, k) in registrationInfo" :key="k">
+            <template v-for="(i,k) in registrationInfo" :key="k">
               <h4
-                class="text-xl lg:text-2xl font-bold my-2 text-white md:text-primary"
                 :id="i.key"
+                class="text-xl lg:text-2xl font-bold my-2 text-white md:text-primary"
               >
                 {{ i.title }}
               </h4>
 
-              <!-- Show description if present -->
               <p v-if="i.desc" class="text-sm mb-2">{{ i.desc }}</p>
 
-              <!-- Render list if present -->
               <ul v-if="i.list" class="ml-6 my-2 space-y-1 pb-6">
-                <template v-for="(v, s) in i.list" :key="`${k}-${s}`">
-                  <li class="list-decimal">
-                    <!-- Case 1: v is just a string -->
-                    <span v-if="typeof v === 'string'">{{ v }}</span>
+                <li
+                  v-for="(v,s) in i.list"
+                  :key="`${k}-${s}`"
+                  class="list-decimal"
+                >
+                  <!-- Text only -->
+                  <span v-if="typeof v === 'string'">{{ v }}</span>
 
-                    <!-- Case 2: v is an object with title/desc/list -->
-                    <div v-else>
-                      <p v-if="v.title" class="font-medium">{{ v.title }}</p>
-                      <p v-if="v.desc" class="text-sm">{{ v.desc }}</p>
+                  <!-- Nested structure -->
+                  <div v-else>
+                    <p v-if="v.title" class="font-medium">
+                      {{ v.title }}
+                    </p>
+                    <p v-if="v.desc" class="text-sm">{{ v.desc }}</p>
 
-                      <!-- Nested list -->
-                      <ul v-if="v.list" class="ml-6 list-disc">
-                        <li v-for="(x, z) in v.list" :key="`${k}-${s}-${z}`">
-                          <span v-if="typeof x === 'string'">{{ x }}</span>
+                    <ul v-if="v.list" class="ml-6 list-disc">
+                      <li
+                        v-for="(x,z) in v.list"
+                        :key="`${k}-${s}-${z}`"
+                      >
+                        <span v-if="typeof x === 'string'">{{ x }}</span>
 
-                          <!-- Support further nesting -->
-                          <div v-else>
-                            <p v-if="x.title" class="font-medium">
-                              {{ x.title }}
-                            </p>
-                            <p v-if="x.desc" class="text-sm">{{ x.desc }}</p>
-                            <ul v-if="x.list" class="ml-6 list-disc">
-                              <li
-                                v-for="(y, q) in x.list"
-                                :key="`${k}-${s}-${z}-${q}`"
-                              >
-                                {{ y }}
-                              </li>
-                            </ul>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </template>
+                        <div v-else>
+                          <p v-if="x.title" class="font-medium">{{ x.title }}</p>
+                          <p v-if="x.desc" class="text-sm">{{ x.desc }}</p>
+
+                          <ul v-if="x.list" class="ml-6 list-disc">
+                            <li
+                              v-for="(y,q) in x.list"
+                              :key="`${k}-${s}-${z}-${q}`"
+                            >
+                              {{ y }}
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
               </ul>
             </template>
           </ul>
         </div>
+
       </div>
     </div>
   </section>
@@ -93,7 +93,36 @@
 </template>
 
 <script setup>
-const currentView = ref(null);
+const currentView = ref('docs')
+
+// Auto scroll to first section
+onMounted(() => {
+  scrollToSection('docs')
+  window.addEventListener('scroll', onScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+})
+
+function scrollToSection(key) {
+  currentView.value = key
+  const el = document.getElementById(key)
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+}
+
+function onScroll() {
+  registrationInfo.forEach(sec => {
+    const el = document.getElementById(sec.key)
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    if (rect.top <= 150 && rect.bottom >= 150) {
+      currentView.value = sec.key
+    }
+  })
+}
+
 const links = [
   { text: "Documents required for registration", key: "docs" },
   { text: "Incorporation Process", key: "process" },
@@ -104,14 +133,13 @@ const links = [
   { text: "Registration Time", key: "time" },
   { text: "Fees", key: "fee" },
   { text: "Checklist for Registration", key: "checklist" },
-];
+]
 
 const companyTypes = {
   title: "Private Limited Company",
-  long: "A Private Limited Company is one of the most widely adopted business structures in India, regulated by the Companies Act, 2013 under the Ministry of Corporate Affairs (MCA). It requires a minimum of two directors and two shareholders to be incorporated. The directors and shareholders may be the same or different individuals, with the condition that at least one director must be a resident of India. A Private Limited Company is considered the most suitable model for startups and enterprises focused on scalability. It offers credibility, limited liability, and ease of raising funds, making it a trusted structure for entrepreneurs aiming long-term growth and organized business expansion.",
-  small:
-    "A widely adopted business structure requiring at least two directors and two shareholders, offering credibility, limited liability, and ease of fundraising.",
-};
+  long: "A Private Limited Company is one of the most widely adopted business structures in India, regulated by the Companies Act, 2013 under the Ministry of Corporate Affairs (MCA). It requires a minimum of two directors and two shareholders for incorporation. At least one director must be an Indian resident. It is the preferred structure for startups aiming high growth.",
+  small: "A widely adopted business structure offering credibility, limited liability, and fundraising options for startups."
+}
 
 const registrationInfo = [
   {
@@ -119,145 +147,135 @@ const registrationInfo = [
     key: "docs",
     list: [
       {
-        title: "Identity Proof and Address Proof",
+        title: "Identity & Address Proof of Directors",
         list: [
-          "Passport / Aadhar card / Voter ID / Driver's License of partners",
-          "PAN card",
-          "Utility bills or Bank Statements as address proof",
-        ],
+          "Aadhaar / Passport / Voter ID / Driving License",
+          "PAN Card",
+          "Recent Utility Bill or Bank Statement"
+        ]
       },
       {
-        title: "Proof of Registered Office",
+        title: "Registered Office Proof",
         list: [
-          "Ownership of Property – Recent utility bill (electricity, corporation tax receipt) not older than 30 days",
-          "Right to use Property – Rental Agreement or No Objection Certificate (NOC) from the owner",
-        ],
+          "Electricity Bill/Tax Receipt (Not older than 30 days)",
+          "Rent Agreement / NOC from Owner if rented"
+        ]
       },
       {
-        title:
-          "Memorandum of Association (MOA) and Articles of Association (AOA)",
+        title: "Company Incorporation Documents",
         list: [
-          "MOA defines the company's objectives and scope of activities",
-          "AOA outlines the company's internal regulations and governance structures",
-        ],
+          "Memorandum of Association (MOA)",
+          "Articles of Association (AOA)"
+        ]
       },
       {
-        title: "Declaration and Consent of Directors",
-        desc: "Form INC-9 and DIR-2 serve as official declaration and consent for director appointments",
-      },
-    ],
+        title: "Declarations",
+        desc: "Form INC-9 & DIR-2 - consent & declaration of directors"
+      }
+    ]
   },
+
   {
     title: "Private Limited Company Incorporation Process",
     key: "process",
     list: [
-      "Obtain a Digital Signature Certificate (DSC) – mandatory for MOA/AOA witnesses",
-      "Apply for Name Approval using SPICe+ Part A – reserve a unique company name",
+      "Obtain Digital Signature Certificate (DSC)",
+      "Name Approval via SPICe+ Part A",
       {
-        title: "Apply for Registration using SPICe+ Part B",
+        title: "File SPICe+ Part B for Registration",
         list: [
-          "Application for allotment of Director Identification Number (DIN)",
-          "Incorporation of the new company",
-          "Submission of e-MoA (INC-33) and e-AoA (INC-34)",
-          "Application for PAN and TAN",
-          "Application for EPFO and ESIC registration",
-          "Professional Tax registration (for Maharashtra)",
-        ],
+          "Apply DIN for Directors",
+          "Submit e-MoA (INC-33) & e-AoA (INC-34)",
+          "Apply PAN & TAN",
+          "Apply EPFO & ESIC",
+          "Online application for bank account"
+        ]
       },
-      "Open a Current Account for the company",
-      "File Commencement of Business Certificate via Form INC-20A (within 180 days of incorporation)",
-    ],
+      "Receive Certificate of Incorporation",
+      "File Commencement of Business (INC-20A)"
+    ]
   },
+
   {
-    title: "Compliances for Private Limited Company",
+    title: "Compliances & Requirements",
     key: "compliance",
     list: [
       {
-        title: "For Partners",
+        title: "Company Compliance",
         list: [
-          "Minimum of 2 directors and 2 shareholders required (at least one director must be an Indian resident)",
-          "Maximum 200 shareholders allowed under Companies Act, 2013",
-        ],
+          "Minimum 2 Board Meetings per year",
+          "Statutory Registrar Filings every year",
+          "Annual Audit mandatory",
+          "Income Tax Return every year"
+        ]
       },
       {
-        title: "For the Company",
-        list: [
-          "Hold the First Board Meeting within 30 days of incorporation",
-          "Four board meetings every year with not more than 120-day gap",
-          "Conduct Annual General Meeting on/before September 30 each year",
-          "Appoint first auditor within 30 days",
-          "File ADT-1 within 15 days of subsequent auditor appointment",
-          "File Annual Returns: AOC-4 (within 30 days of AGM) and MGT-7 (within 60 days of AGM)",
-          "File Income Tax Return (ITR-6) annually",
-          "File DIR-3 KYC for directors",
-        ],
+        title: "Capital Requirements",
+        desc: "No minimum paid-up capital requirement. Directors may decide."
       },
       {
-        title: "Minimum Capital Requirement",
-        desc: "No mandatory minimum capital. Practically advised authorized capital: ₹1,00,000.",
-      },
-      {
-        title: "Tax Rates",
+        title: "Taxation",
         list: [
-          "Basic corporate tax rate: 25% (FY 23–24)",
-          "Surcharge: 7% (if income > ₹1 Cr up to ₹10 Cr), 12% (if > ₹10 Cr)",
-          "Health & Education Cess: 4% on tax + surcharge",
-        ],
-      },
-    ],
+          "Corporate Tax Rate: 25%",
+          "Surcharge (if applicable)",
+          "Health & Education Cess – 4%"
+        ]
+      }
+    ]
   },
+
   {
-    title: "Advantages of Private Limited Company",
+    title: "Advantages",
     key: "advantages",
     list: [
       "Limited liability for shareholders",
-      "Separate legal entity status",
-      "Perpetual succession (company continues irrespective of members)",
-      "Easier access to funding and foreign investment",
-      "Possible tax benefits and incentives",
-    ],
+      "Separate Legal Identity",
+      "Easy fundraising from investors",
+      "Better business credibility"
+    ]
   },
+
   {
-    title: "Disadvantages of Private Limited Company",
+    title: "Disadvantages",
     key: "disadvantages",
     list: [
-      "Complex and costly registration & dissolution process",
-      "Recurring compliance costs every year regardless of turnover",
-      "Slower decision-making due to dependence on multiple directors",
-      "Requires frequent professional assistance (CA/CS)",
-    ],
+      "Higher compliance cost",
+      "More legal formalities",
+      "Slower decision making vs proprietorship"
+    ]
   },
+
   {
-    title: "Private Limited Company Registration Number",
+    title: "Registration Number",
     key: "reg",
-    desc: "A unique 21-digit Corporate Identification Number (CIN) is issued on incorporation, encoding listing status, industry code, state, year of incorporation, company type, and unique ROC registration number.",
+    desc: "21-digit Corporate Identification Number (CIN) issued by MCA."
   },
+
   {
-    title: "Private Limited Company Registration Time",
+    title: "Registration Time",
     key: "time",
     list: [
-      "Approx. 7–10 days after filing SPICe+, subject to MCA approval",
-      "Delays may occur due to incomplete documentation, name approval rejections, MCA server issues, payment delays, or jurisdictional variance",
-    ],
+      "7–10 working days (subject to MCA approval)"
+    ]
   },
+
   {
-    title: "Private Limited Company Registration Fees",
+    title: "Fees",
     key: "fee",
-    desc: "₹1,499 + Govt. Fees with Novadesk (can vary with jurisdiction, professional fees, and extra services).",
+    desc: "₹1,499 + Government fees (varies by state)"
   },
+
   {
     title: "Checklist for Registration",
     key: "checklist",
     list: [
-      "Obtain Digital Signature Certificate for all directors",
-      "Draft e-MOA & e-AOA",
-      "Reserve unique company name via SPICe+ Part A",
-      "Submit incorporation via SPICe+ Part B",
-      "Submit documents and fees",
-      "Receive Certificate of Incorporation",
+      "Apply DSC",
+      "Unique Company Name",
+      "Submit SPICe+ Form",
+      "Get COI",
       "Obtain PAN & TAN",
-      "Open company bank account and provide office address proof",
-    ],
-  },
-];
+      "Open Bank Account"
+    ]
+  }
+]
 </script>

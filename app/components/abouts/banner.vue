@@ -2,14 +2,13 @@
   <section
     class="w-full min-h-screen lg:min-h-[760px] xl:min-h-screen relative py-4 px-4 overflow-visible"
   >
-    <Nav />
+    <!-- <Nav /> -->
 
     <div class="top_gem"></div>
 
-    <!-- FIX: remove fixed/sticky height → allow auto height -->
     <div class="w-full h-auto z-30">
       <div
-        class="max-w-[1440px] h-auto bg-white/20 border border-primary/20 rounded-2xl backdrop-blur-xl mx-auto flex items-start justify-start md:px-4 xl:px-0 mt-4"
+        class="max-w-[1440px] h-auto bg-white/20 border border-primary/20 rounded-2xl backdrop-blur-xl mx-auto flex items-start justify-start md:px-4 xl:px-0"
       >
         <div
           class="w-full p-6 md:p-12 lg:p-28 space-y-6 flex flex-col items-start"
@@ -55,8 +54,8 @@
               >
                 <span
                   class="icon-[solar--lightbulb-bolt-broken]"
-                ></span
-                >VISION
+                ></span>
+                VISION
               </span>
               <p class="max-md:text-lg">
                 To become a leading force in digital innovation, inspiring
@@ -71,7 +70,8 @@
               <span
                 class="flex items-center justify-center gap-x-2 font-semibold text-primary"
               >
-                <span class="icon-[solar--rocket-broken]"></span>MISSION
+                <span class="icon-[solar--rocket-broken]"></span>
+                MISSION
               </span>
               <p class="max-md:text-lg">
                 To empower brands by delivering bold digital strategies that
@@ -80,7 +80,7 @@
               </p>
             </div>
           </div>
-          <!-- END FIX -->
+          <!-- END -->
         </div>
       </div>
     </div>
