@@ -1,89 +1,80 @@
 <template>
-  <!-- Navbar -->
-  <section class="h-auto sticky top-0 z-50 flex items-center justify-center">
-    <nav class="navst">
-      <!-- Logo -->
-      <NuxtLink to="/">
-        <NuxtImg class="max-md:h-6 md:h-10 w-auto" src="/img/novadesk.webp" />
+  <nav class="w-full bg-white border-b border-primary/20 shadow-sm fixed top-0 left-0 z-50">
+    <div class="max-w-[1440px] mx-auto flex items-center justify-between py-3 px-4">
+
+      <!-- 🔹 LOGO -->
+      <NuxtLink to="/" class="flex items-center gap-2">
+        <img
+          src="~/assets/img/novadesk.webp"
+          alt="Novadesk Logo"
+          class="h-10 w-auto object-contain"
+        />
       </NuxtLink>
 
-      <!-- Desktop Links -->
-      <ul class="nav-links">
-        <li><NuxtLink to="/">Home</NuxtLink></li>
-        <li><NuxtLink to="/services">Service</NuxtLink></li>
-        <li><NuxtLink to="/plans">Plans</NuxtLink></li>
-        <li><NuxtLink to="/about-us">About Us</NuxtLink></li>
-        <li><NuxtLink to="/contact-us">Contact Us</NuxtLink></li>
+      <!-- 🔹 DESKTOP MENU -->
+      <ul class="hidden md:flex items-center gap-8 text-base font-medium">
+        <NuxtLink to="/" class="hover:text-primary">Home</NuxtLink>
+        <NuxtLink to="/services" class="hover:text-primary">Service</NuxtLink>
+        <NuxtLink to="/plans" class="hover:text-primary">Plans</NuxtLink>
+        <NuxtLink to="/about-us" class="hover:text-primary">About Us</NuxtLink>
+        <NuxtLink to="/contact-us" class="hover:text-primary">Contact Us</NuxtLink>
       </ul>
 
-      <!-- Right Buttons -->
-      <span class="flex items-center gap-x-3">
-        <template v-if="!loggedIn">
-          <!-- Call Us (Mobile Call Support) -->
-          <a href="tel:+919876543210"
-            class="btn btn-ghost group/call hidden lg:flex"
-          >
-            <span
-              class="icon-[solar--phone-calling-linear] text-lg group-hover/call:rotate-12 transition-all duration-200 ease-linear"
-            ></span>
-            Call Us
-          </a>
+      <!-- 🔹 RIGHT SIDE -->
+      <div class="hidden md:flex items-center gap-3">
+        <button class="flex items-center gap-2 font-medium">
+          <span class="icon-[solar--phone-outline] text-lg"></span> Call Us
+        </button>
 
-          <!-- Lets Talk Button -->
-          <NuxtLink to="/contact-us" class="btn btn-primary hidden md:flex">
-            Lets Talk
-          </NuxtLink>
+        <NuxtLink
+          to="/contact-us"
+          class="bg-primary text-white px-4 py-2 rounded-md font-medium hover:bg-primary/80"
+        >
+          Lets Talk
+        </NuxtLink>
+      </div>
 
-          <!-- Mobile Menu Button -->
-          <button
-            @click="mobileNav = !mobileNav"
-            class="btn btn-primary btn-square max-md:flex hidden"
-          >
-            <span class="icon-[solar--hamburger-menu-linear] text-lg"></span>
-          </button>
-        </template>
+      <!-- 🔹 MOBILE HAMBURGER -->
+      <button @click="toggleMobileMenu" class="md:hidden text-2xl">
+        <span class="icon-[solar--menu-burger-linear]"></span>
+      </button>
 
-        <template v-else>
-          <NuxtLink to="/dashboard" class="btn btn-primary max-md:hidden flex">
-            Dashboard
-          </NuxtLink>
-          <button
-            @click="mobileNav = !mobileNav"
-            class="btn btn-primary btn-square max-md:flex hidden"
-          >
-            <span class="icon-[solar--hamburger-menu-linear] text-lg"></span>
-          </button>
-        </template>
-      </span>
-    </nav>
-  </section>
+    </div>
 
-  <!-- Mobile Navigation Menu -->
-  <div
-    :class="mobileNav ? 'left-0 opacity-100' : '-left-full opacity-0'"
-    class="fixed top-0 h-dvh w-screen z-50 bg-white/40 backdrop-blur-xl flex flex-col items-start py-6 transition-all duration-300 ease-in-out"
-  >
-    <ul class="mobile_nav w-full">
-      <!-- Close Button -->
-      <li
-        @click="mobileNav = false"
-        class="w-full flex items-center justify-between px-6"
+    <!-- 🔹 MOBILE MENU -->
+    <div
+      v-if="mobileMenu"
+      class="md:hidden w-full bg-white flex flex-col gap-4 px-6 py-4 shadow-lg"
+    >
+      <NuxtLink @click="toggleMobileMenu" to="/" class="hover:text-primary">Home</NuxtLink>
+      <NuxtLink @click="toggleMobileMenu" to="/services" class="hover:text-primary">Service</NuxtLink>
+      <NuxtLink @click="toggleMobileMenu" to="/plans" class="hover:text-primary">Plans</NuxtLink>
+      <NuxtLink @click="toggleMobileMenu" to="/about-us" class="hover:text-primary">About Us</NuxtLink>
+      <NuxtLink @click="toggleMobileMenu" to="/contact-us" class="hover:text-primary">Contact Us</NuxtLink>
+
+      <NuxtLink
+        to="/contact-us"
+        class="bg-primary text-white px-4 py-2 rounded-md text-center font-medium"
+        @click="toggleMobileMenu"
       >
-        <p>Close</p>
-        <span class="icon-[material-symbols--close-rounded]"></span>
-      </li>
+        Lets Talk
+      </NuxtLink>
+    </div>
 
-      <!-- Mobile Links -->
-      <li><NuxtLink @click="mobileNav=false" to="/">Home</NuxtLink></li>
-      <li><NuxtLink @click="mobileNav=false" to="/services">Service</NuxtLink></li>
-      <li><NuxtLink @click="mobileNav=false" to="/plans">Plans</NuxtLink></li>
-      <li><NuxtLink @click="mobileNav=false" to="/about-us">About Us</NuxtLink></li>
-      <li><NuxtLink @click="mobileNav=false" to="/contact-us">Contact Us</NuxtLink></li>
-    </ul>
-  </div>
+  </nav>
 </template>
 
 <script setup>
-const mobileNav = ref(false)
-const { loggedIn } = useUserSession()
+import { ref } from "vue";
+
+const mobileMenu = ref(false);
+const toggleMobileMenu = () => {
+  mobileMenu.value = !mobileMenu.value;
+};
 </script>
+
+<style scoped>
+nav {
+  backdrop-filter: blur(6px);
+}
+</style>
