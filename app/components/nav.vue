@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar-bg fixed top-0 left-0 w-full z-50">
+  <nav class="navbar-wrapper fixed top-0 left-0 w-full z-50">
     <div class="navbar-box">
 
       <!-- LOGO -->
@@ -7,10 +7,21 @@
         <img
           src="/img/novadesk.webp"
           alt="Novadesk Logo"
-          class="h-12 w-auto object-contain"
+          class="h-10 w-auto object-contain"
         />
-        <!-- <span class="text-sm text-secondary">Where Your Business Begins</span> -->
       </NuxtLink>
+
+      <!-- MOBILE HAMBURGER BUTTON (ONLY MOBILE) -->
+      <button 
+        @click="toggleMobileMenu" 
+        class="hamburger-btn md:hidden"
+      >
+        <div class="burger-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
 
       <!-- DESKTOP MENU -->
       <ul class="hidden md:flex items-center gap-10 text-[17px] font-medium">
@@ -21,7 +32,7 @@
         <NuxtLink to="/contact-us" class="hover:text-primary">Contact Us</NuxtLink>
       </ul>
 
-      <!-- RIGHT ACTIONS -->
+      <!-- DESKTOP BUTTONS -->
       <div class="hidden md:flex items-center gap-4">
         <button class="flex items-center gap-2 font-medium text-secondary">
           <span class="icon-[solar--phone-outline] text-xl"></span> Call Us
@@ -35,13 +46,9 @@
         </NuxtLink>
       </div>
 
-      <!-- MOBILE MENU ICON -->
-      <button @click="toggleMobileMenu" class="md:hidden text-3xl text-secondary">
-        <span class="icon-[solar--menu-burger-linear]"></span>
-      </button>
     </div>
 
-    <!-- MOBILE DROPDOWN -->
+    <!-- MOBILE MENU DROPDOWN -->
     <transition name="slide-fade">
       <div
         v-if="mobileMenu"
@@ -72,36 +79,78 @@ const toggleMobileMenu = () => (mobileMenu.value = !mobileMenu.value);
 </script>
 
 <style scoped>
-
-/* 🌸 BACKGROUND LIKE FIRST IMAGE */
-.navbar-bg {
-  background: linear-gradient(to right, #ffe5e5, #fff4f4);
+/* Background like screenshot */
+.navbar-wrapper {
+  background: #ffd7d7;
+  padding: 12px 0;
 }
 
-/* 🌸 CENTERED ROUNDED BOX */
+/* Rounded main navbar box */
 .navbar-box {
-  max-width: 1140px;
-  margin: 20px auto;
-  padding: 12px 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 12px 16px;
 
   background: white;
-  border-radius: 18px;
+  border-radius: 20px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  box-shadow: 0 8px 22px rgba(255, 100, 80, 0.18);
-  border: 1px solid rgba(255, 120, 100, 0.25);
-
-  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(255, 100, 80, 0.25);
 }
 
-/* Mobile animation */
+/* Desktop spacing */
+@media (min-width: 768px) {
+  .navbar-box {
+    max-width: 1140px;
+    margin-top: 10px;
+    padding: 16px 24px;
+  }
+}
+
+/* ---------- MOBILE HAMBURGER BUTTON ---------- */
+
+.hamburger-btn {
+  width: 50px;
+  height: 42px;
+  background: #f28b82;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 3 white horizontal bars */
+.burger-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.burger-lines span {
+  width: 18px;
+  height: 2.5px;
+  background: white;
+  border-radius: 2px;
+}
+
+/* FORCE HIDE HAMBURGER ON DESKTOP */
+@media (min-width: 768px) {
+  .hamburger-btn {
+    display: none !important;
+  }
+}
+
+/* Dropdown animation */
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all .25s ease;
+  transition: all 0.25s ease;
 }
+
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   opacity: 0;

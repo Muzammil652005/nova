@@ -1,6 +1,6 @@
 /// <reference types="@nuxt/image" />
-/// <reference types="nuxt-auth-utils" />
 /// <reference types="@nuxt/telemetry" />
+/// <reference types="nuxt-auth-utils" />
 /// <reference path="types/builder-env.d.ts" />
 /// <reference path="types/plugins.d.ts" />
 /// <reference path="types/build.d.ts" />

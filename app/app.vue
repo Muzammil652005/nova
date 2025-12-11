@@ -24,9 +24,7 @@ usePageAnimations();
 /* ---------------------------- */
 .content-wrapper {
   max-width: 440px;
-  /* margin: 0 auto;
-  padding: 0 16px; */
-  width: 10%;
+  width: 100%;        /* ✅ FIXED (10% was wrong) */
   box-sizing: border-box;
 }
 
