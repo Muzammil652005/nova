@@ -49,7 +49,7 @@
     <div class="relative">
       <div class="top-fade-grid"></div>
       <div
-        class="max-w-[1440px] mx-auto h-full flex flex-col md:flex-row items-start justify-center gap-x-10 sticky z-20 max-md:px-4 py-8 md:py-12 lg:py-24"
+        class="max-w-[1440px] mx-auto h-full flex flex-col md:flex-row items-start justify-center gap-x-10 sticky z-20 max-md:px-4 py-2 md:py-4 lg:py-24"
       >
         <div class="size-full space-y-6">
           <h1 class="text-4xl font-semibold">Why Novadesk?</h1>

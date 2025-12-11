@@ -1,28 +1,25 @@
 <template>
-  <section
+  <!-- <section
     class="w-full min-h-screen lg:min-h-[760px] xl:min-h-screen relative py-4 px-4 overflow-visible"
-  >
+  > -->
+  <!-- <section class="w-full min-h-fit lg:min-h-fit relative py-4 px-4 overflow-visible"> -->
+  <section class="w-full bg-white max-lg:px-4 py-12 lg:py-20 relative">
+
+
     <!-- <Nav /> -->
 
     <div class="top_gem"></div>
 
     <div class="w-full h-auto z-30">
       <div
-        class="max-w-[1440px] h-auto bg-white/20 border border-primary/20 rounded-2xl backdrop-blur-xl mx-auto flex items-start justify-start md:px-4 xl:px-0"
-      >
-        <div
-          class="w-full p-6 md:p-12 lg:p-28 space-y-6 flex flex-col items-start"
-        >
-          <span
-            class="hero-mini max-md:w-[40%] max-md:mx-auto flex items-center justify-center gap-x-2"
-          >
+        class="max-w-[1440px] h-auto bg-white/20 border border-primary/20 rounded-2xl backdrop-blur-xl mx-auto flex items-start justify-start md:px-4 xl:px-0">
+        <div class="w-full p-6 md:p-12 lg:p-28 space-y-6 flex flex-col items-start">
+          <span class="hero-mini max-md:w-[40%] max-md:mx-auto flex items-center justify-center gap-x-2">
             <span class="icon-[solar--add-circle-broken]"></span>
             Our story
           </span>
 
-          <h1
-            class="text-4xl font-bold text-primary max-md:text-center max-md:w-full"
-          >
+          <h1 class="text-4xl font-bold text-primary max-md:text-center max-md:w-full">
             Who we are!
           </h1>
 
@@ -43,18 +40,10 @@
             manage their virtual office needs efficiently.
           </p>
 
-          <div
-            class="w-full flex flex-col lg:flex-row items-start gap-6 pt-6"
-          >
-            <div
-              class="w-full lg:w-1/2 text-xl font-medium flex flex-col items-start justify-center gap-y-2"
-            >
-              <span
-                class="flex items-center justify-center gap-x-2 font-semibold text-primary"
-              >
-                <span
-                  class="icon-[solar--lightbulb-bolt-broken]"
-                ></span>
+          <div class="w-full flex flex-col lg:flex-row items-start gap-6 pt-6">
+            <div class="w-full lg:w-1/2 text-xl font-medium flex flex-col items-start justify-center gap-y-2">
+              <span class="flex items-center justify-center gap-x-2 font-semibold text-primary">
+                <span class="icon-[solar--lightbulb-bolt-broken]"></span>
                 VISION
               </span>
               <p class="max-md:text-lg">
@@ -64,12 +53,8 @@
               </p>
             </div>
 
-            <div
-              class="w-full lg:w-1/2 text-xl font-medium flex flex-col items-start justify-center gap-y-2"
-            >
-              <span
-                class="flex items-center justify-center gap-x-2 font-semibold text-primary"
-              >
+            <div class="w-full lg:w-1/2 text-xl font-medium flex flex-col items-start justify-center gap-y-2">
+              <span class="flex items-center justify-center gap-x-2 font-semibold text-primary">
                 <span class="icon-[solar--rocket-broken]"></span>
                 MISSION
               </span>

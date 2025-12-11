@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full min-h-screen flex flex-col items-center justify-between relative py-10 px-4"
+    
   >
     <div class="top-fade-grid"></div>
 

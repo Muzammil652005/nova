@@ -1,14 +1,14 @@
 <template>
-  <section
-    class="w-full min-h-screen lg:min-h-[1150px] bg-white max-lg:px-4 py-8 lg:py-16 relative"
-  >
+  <!-- <section class="w-full bg-white max-lg:px-4 py-12 lg:py-20 relative">
+
+    > -->
+  <section class="w-full bg-white max-lg:px-4 py-8 lg:py-16 relative">
+
     <div class="bottom-fade-grid z-0"></div>
 
     <div class="max-w-[1440px] h-auto mx-auto flex flex-col sticky z-10">
       <span class="w-full flex items-center justify-between">
-        <h4
-          class="text-xl md:text-4xl font-medium lg:font-semibold lg:leading-12 text-primary"
-        >
+        <h4 class="text-xl md:text-4xl font-medium lg:font-semibold lg:leading-12 text-primary">
           Beyond Offices <br />
           Towards Opportunities
         </h4>
@@ -22,17 +22,11 @@
       <div class="w-full grid md:grid-cols-3 grid-flow-row gap-3 mt-8">
         <template v-for="(i, k) in benefits.slice(0, 3)" :key="k">
           <div
-            class="w-full h-auto bg-primary rounded-xl px-4 py-6 lg:px-8 lg:py-6 flex flex-col justify-between max-md:gap-y-4"
-          >
-            <span
-              :class="i.logo"
-              class="text-white text-5xl lg:text-6xl"
-            ></span>
+            class="w-full h-auto bg-primary rounded-xl px-4 py-6 lg:px-8 lg:py-6 flex flex-col justify-between max-md:gap-y-4">
+            <span :class="i.logo" class="text-white text-5xl lg:text-6xl"></span>
 
             <span class="w-full h-auto">
-              <h4
-                class="font-semibold lg:text-xl lg:font-bold text-white lg:mt-8"
-              >
+              <h4 class="font-semibold lg:text-xl lg:font-bold text-white lg:mt-8">
                 {{ i.title }}
               </h4>
               <p class="lg:text-lg text-white/60 lg:mt-3">
@@ -46,17 +40,11 @@
       <div class="w-full grid md:grid-cols-2 grid-flow-row gap-3 mt-3">
         <template v-for="i in benefits.slice(3, 5)" :key="i">
           <div
-            class="w-full h-auto bg-primary rounded-xl px-6 py-4 lg:px-8 lg:py-6 flex flex-col justify-between max-md:gap-y-4"
-          >
-            <span
-              :class="i.logo"
-              class="text-white text-5xl lg:text-6xl"
-            ></span>
+            class="w-full h-auto bg-primary rounded-xl px-6 py-4 lg:px-8 lg:py-6 flex flex-col justify-between max-md:gap-y-4">
+            <span :class="i.logo" class="text-white text-5xl lg:text-6xl"></span>
 
             <span class="w-full h-auto">
-              <h4
-                class="font-semibold lg:text-xl lg:font-bold text-white lg:mt-8"
-              >
+              <h4 class="font-semibold lg:text-xl lg:font-bold text-white lg:mt-8">
                 {{ i.title }}
               </h4>
               <p class="lg:text-lg text-white/60 lg:mt-3 hidden lg:block">

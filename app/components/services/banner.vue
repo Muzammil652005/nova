@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full min-h-screen lg:min-h-[760px] xl:min-h-screen relative pt-4 px-4 overflow-visible"
+    class="w-full min-h-screen lg:min-h-[760px] xl:min-h-screen relative pt-12 px-2 overflow-visible"
   >
     <!-- <Nav /> -->
 

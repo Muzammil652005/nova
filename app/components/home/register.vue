@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full min-h-screen bg-white tabs-section px-4 py-12">
+  <section class="w-full bg-white tabs-section px-4 py-10">
     <div
       class="max-w-[1440px] mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-y-8 md:gap-x-10"
     >
@@ -17,7 +17,7 @@
             <button
               @click="currentIndex = index"
               class="tab-btn"
-              :class="currentIndex == index ? 'tab-btn-active' : ''"
+              :class="currentIndex === index ? 'tab-btn-active' : ''"
             >
               {{ item.btn }}
             </button>
@@ -27,7 +27,7 @@
         <!-- Tab Content -->
         <template v-for="(item, index) in kycDocuments" :key="index">
           <div
-            v-if="currentIndex == index"
+            v-if="currentIndex === index"
             class="w-full bg-primary/10 border border-primary/20 p-5 rounded-md"
           >
             <h5 class="text-xl lg:text-2xl text-primary font-semibold">
@@ -43,29 +43,28 @@
         </template>
       </div>
 
-      <!-- RIGHT: Image -->
-      <div
-        class="w-full md:w-1/2 h-auto flex items-center justify-center"
-      >
-        <div
-          class="w-full h-auto relative rounded-xl overflow-hidden"
-        >
-          <NuxtImg class="rounded-xl tags_area"
+      <!-- RIGHT: IMAGE -->
+      <div class="w-full md:w-1/2 flex items-center justify-center">
+        <div class="w-full relative rounded-xl overflow-hidden right-image-wrapper">
+          
+          <NuxtImg
             src="/img/assistant_2.webp"
             alt="Registration"
+            class="rounded-xl object-cover w-full fixed-img"
           />
 
           <span
-            class="size-20 md:size-44 pt-5 pl-5 bg-white absolute bottom-0 right-0 rounded-tl-xl flex"
+            class="size-16 md:size-32 lg:size-40 bg-white absolute bottom-0 right-0 rounded-tl-xl flex p-3 md:p-5"
           >
             <span
               class="size-full bg-primary rounded-xl flex items-center justify-center"
             >
               <span
-                class="icon-[solar--arrow-right-up-linear] text-3xl md:text-6xl lg:text-8xl text-white"
+                class="icon-[solar--arrow-right-up-linear] text-3xl md:text-5xl lg:text-7xl text-white"
               ></span>
             </span>
           </span>
+
         </div>
       </div>
 
@@ -75,6 +74,7 @@
 
 <script setup>
 const currentIndex = ref(0);
+
 const kycDocuments = [
   {
     title: "Sole Proprietor / Individual",
@@ -114,3 +114,25 @@ const kycDocuments = [
   },
 ];
 </script>
+
+<style scoped>
+/* Remove unwanted gap */
+.tabs-section {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+
+/* Fix image layout and alignment */
+.right-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent stretching and remove scrolling push */
+.fixed-img {
+  height: 480px;
+  object-fit: cover;
+  width: 100%;
+}
+</style>
